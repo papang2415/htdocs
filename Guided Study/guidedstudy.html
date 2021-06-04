@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<style>
+  table {
+    width: 100%;
+    text-align: center;
+  }
+
+  td,
+  th {
+    border: 2px solid black;
+    font-family: monospace;
+  }
+
+  /* td{
+    background-color: white;
+  } */
+  p {
+    font-family: monospace;
+  }
+
+  h2 {
+    font-family: monospace;
+  }
+
+  input {
+    font-family: monospace;
+  }
+
+  body {
+    background-color: lightgrey;
+  }
+</style>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $.getJSON('gs.json', function (data) {
+        $.each(data, function (index) {
+          $("#myTable").append("<tr><td>" + data[index].name + "</td><td>" + data[index].age + "</td><td>" + data[index].email + "</td></tr>")
+        })
+      });
+      $("#myInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+      // $("#myInput").on("keyup", function () {
+      //   var value = $(this).val().toLowerCase();
+      //   $.getJSON("daryll.json").filter(function (name) {
+      //     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      //   });
+      // });
+    });
+  </script>
+</head>
+
+<body>
+
+  <h2>Filterable Table</h2>
+  <p>Type something in the input field to search the table names, age or emails.....</p>
+  <input id="myInput" type="text" placeholder="Search...">
+  <br><br>
+
+  <table id="myTable">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>
+
+</body>
+
+</html>
